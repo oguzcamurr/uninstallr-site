@@ -74,6 +74,31 @@
     @media (prefers-reduced-motion: reduce) {
       .hero h1 { animation: none; background: none; color: var(--text); }
     }
+  
+    /* === Visual polish (Phase 1 already applied) === */
+
+    /* Social proof strip */
+    .social-proof { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin: 12px 0 0; }
+    .pill { font-size:12px; color:var(--muted); border:1px solid var(--ring); padding:6px 10px; border-radius:999px; background: rgba(19,22,28,.55); }
+
+    /* Screenshot gallery */
+    .shots { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-top:24px; }
+    @media (max-width: 900px) { .shots { grid-template-columns: 1fr; } }
+    figure.shot { margin:0; background: rgba(19,22,28,.6); border:1px solid var(--ring); border-radius:16px; overflow:hidden; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot figcaption { padding:10px 12px; font-size:13px; color:var(--muted); border-top:1px solid var(--ring); }
+
+    /* FAQ */
+    .faq { max-width:840px; margin: 0 auto; }
+    .faq details { background: rgba(19,22,28,.55); border:1px solid var(--ring); border-radius:12px; padding:12px 14px; margin:10px 0; }
+    .faq summary { cursor:pointer; font-weight:600; color: var(--text); }
+    .faq p { color: var(--muted); margin:8px 0 0; }
+
+    /* Badge in Download */
+    .badge-version { display:inline-block; margin: 6px 0 0; background: rgba(110,127,255,.15); border: 1px solid var(--ring); color: var(--accent-2); font-size: 12px; padding: 6px 10px; border-radius: 999px; }
+
+    /* Reduced motion fallback */
+    @media (prefers-reduced-motion: reduce) { .hero h1 { animation:none; background:none; color:var(--text); } }
   </style>
 </head>
 <body>
@@ -107,6 +132,65 @@
           <button class="cta" type="submit">Download Free</button>
         </form>
       </section>
+
+      <!-- Social proof -->
+      <section aria-label="Social proof">
+        <div class="social-proof">
+          <span class="pill">Trusted by early macOS testers</span>
+          <span class="pill">Notarized & Stapled</span>
+          <span class="pill">Apple Silicon + Intel</span>
+          <span class="pill">No kernel extensions</span>
+        </div>
+      </section>
+
+      <!-- Why Uninstallr -->
+      <section id="why">
+        <h2 class="section-title">Why Uninstallr?</h2>
+        <p class="section-sub">App removals on macOS leave a lot behind — caches, receipts, agents, containers. Uninstallr gives you a clean, safe, and transparent uninstall flow with a clear preview before you remove anything.</p>
+      </section>
+
+      <!-- Screenshots / Demo -->
+      <section id="screenshots">
+        <h2 class="section-title">Screenshots</h2>
+        <p class="section-sub">A quick peek at Uninstallr in action.</p>
+        <div class="shots">
+          <figure class="shot">
+            <img src="/screens/app-1.png" alt="Uninstallr — app selection and scan" loading="lazy">
+            <figcaption>1. Select an app and let Uninstallr find everything related.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/screens/app-2.png" alt="Uninstallr — preview leftovers" loading="lazy">
+            <figcaption>2. Review leftovers safely before removal.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/screens/app-3.png" alt="Uninstallr — remove & reclaim space" loading="lazy">
+            <figcaption>3. Confirm and reclaim your disk space.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq">
+          <details>
+            <summary>Is Uninstallr safe?</summary>
+            <p>Yes. It’s signed with Developer ID and notarized by Apple. You always get a clear preview before removing anything.</p>
+          </details>
+          <details>
+            <summary>What macOS versions are supported?</summary>
+            <p>Built and tested for macOS 14 (Sonoma) and 15 (Sequoia), Universal Binary for Apple Silicon and Intel.</p>
+          </details>
+          <details>
+            <summary>Does it remove system files?</summary>
+            <p>No. Uninstallr targets app-related data (caches, preferences, receipts, LaunchAgents, containers) and avoids critical system files.</p>
+          </details>
+          <details>
+            <summary>Is there a Pro version?</summary>
+            <p>Yes, Uninstallr Pro is in the works. Leave your email on download to get early access updates.</p>
+          </details>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -115,6 +199,29 @@
   </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Download-after-submit flow (Formspree + immediate DMG download)
+    (function(){
+      const DMG_URL = "https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg";
+      const form = document.getElementById('dlform');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        data.append('source','uninstallr.app');
+        data.append('ts', new Date().toISOString());
+        try {
+          await fetch(form.action, { method:'POST', headers:{'Accept':'application/json'}, body:data });
+        } catch(err) {
+          console.warn('Form submit failed, continuing to download', err);
+        }
+        window.location.href = DMG_URL;
+      });
+    })();
   </script>
 </body>
 </html>
