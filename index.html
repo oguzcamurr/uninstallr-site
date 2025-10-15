@@ -38,19 +38,13 @@
     }
     .container { max-width: 1120px; margin: 0 auto; padding: 20px 24px 80px; }
 
-    /* Header */
     header { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-    .logo {
-      width: 36px; height: 36px; border-radius: 12px;
-      background: linear-gradient(145deg, var(--accent), var(--accent-2));
-      box-shadow: 0 6px 30px rgba(110,127,255,.35), inset 0 1px 0 rgba(255,255,255,.25);
-    }
+    .logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(145deg, var(--accent), var(--accent-2)); box-shadow: 0 6px 30px rgba(110,127,255,.35), inset 0 1px 0 rgba(255,255,255,.25); }
     .brand span { font-weight: 600; font-size: 16px; opacity: .92; }
     nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 14px; }
     nav a:hover { color: var(--text); }
 
-    /* Hero */
     .hero { text-align: center; padding: 72px 0 56px; }
     .eyebrow { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #0c0f14; border: 1px solid var(--ring); color: var(--muted); font-size: 12px; }
     h1 { font-size: clamp(32px, 5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin: 18px 0 14px; }
@@ -64,14 +58,12 @@
     .badges { display: flex; gap: 12px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
     .badge { font-size: 12px; color: var(--muted); border: 1px solid var(--ring); padding: 6px 10px; border-radius: 999px; }
 
-    /* Feature Cards */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
     .card { background: rgba(19,22,28,.6); border: 1px solid var(--ring); border-radius: 16px; padding: 22px; backdrop-filter: saturate(120%) blur(6px); }
     .card h3 { margin: 0 0 8px; font-size: 18px; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    /* Sections */
     section { margin-top: 88px; }
     .section-title { text-align: center; font-size: 28px; margin-bottom: 16px; }
     .section-sub { text-align: center; color: var(--muted); max-width: 720px; margin: 0 auto 28px; }
@@ -80,17 +72,14 @@
     @media (max-width: 900px) { .list { grid-template-columns: 1fr; } }
     .li { background: rgba(19,22,28,.55); border: 1px solid var(--ring); padding: 16px; border-radius: 12px; color: var(--muted); font-size: 14px; }
 
-    /* Footer */
     footer { margin-top: 96px; padding: 24px 0 48px; color: var(--muted); border-top: 1px solid var(--ring); text-align: center; }
 
-    /* Motion */
     .fade-up { opacity: 0; transform: translateY(8px); animation: fadeUp .8s ease forwards; }
     .fade-up.delay-1 { animation-delay: .15s; }
     .fade-up.delay-2 { animation-delay: .3s; }
     .fade-up.delay-3 { animation-delay: .45s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* Tiny toast */
     .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: #0c0f14; color: var(--text); border: 1px solid var(--ring); padding: 10px 14px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
     .toast.show { opacity: 1; transform: translate(-50%, -4px); }
   </style>
@@ -152,33 +141,20 @@
         </div>
       </section>
 
-      <!-- DOWNLOAD: email capture + auto-download -->
       <section id="download">
         <h2 class="section-title">Download</h2>
         <p class="section-sub">Get the latest notarized DMG. Drag-and-drop install to Applications.</p>
 
-        <form id="dlform"
-              action="https://formspree.io/f/XXXXXXXX"  
-              method="POST"
-              style="max-width:520px;margin:16px auto 0;display:flex;gap:8px;">
-          <input type="email" name="email" required
-                 placeholder="Your email for Pro updates"
-                 autocomplete="email"
-                 style="flex:1;background:#0c0f14;border:1px solid var(--ring);color:#e9eef5;border-radius:10px;padding:12px 14px;outline:none;">
-          <!-- Honeypot (spam trap) -->
+        <form id="dlform" action="https://formspree.io/f/mnnglvgd" method="POST" style="max-width:520px;margin:16px auto 0;display:flex;gap:8px;">
+          <input type="email" name="email" required placeholder="Your email for Pro updates" autocomplete="email" style="flex:1;background:#0c0f14;border:1px solid var(--ring);color:#e9eef5;border-radius:10px;padding:12px 14px;outline:none;">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;">
           <button class="cta" type="submit" id="dlbtn" style="border:0;">Download Free</button>
         </form>
 
-        <p class="section-sub" style="text-align:center;margin-top:8px;">
-          We’ll email you only about Uninstallr updates. No spam, unsubscribe anytime.
-        </p>
+        <p class="section-sub" style="text-align:center;margin-top:8px;">We’ll email you only about Uninstallr updates. No spam, unsubscribe anytime.</p>
 
-        <p class="section-sub" style="margin-top: 16px; text-align:center;">
-          Verify integrity:
-          <code style="background:#0c0f14;border:1px solid var(--ring);padding:6px 8px;border-radius:8px;color:#cbd5e1;">
-            shasum -a 256 Uninstallr.dmg
-          </code>
+        <p class="section-sub" style="margin-top: 16px; text-align:center;">Verify integrity:
+          <code style="background:#0c0f14;border:1px solid var(--ring);padding:6px 8px;border-radius:8px;color:#cbd5e1;">shasum -a 256 Uninstallr.dmg</code>
         </p>
 
         <noscript>
@@ -194,14 +170,10 @@
     </footer>
   </div>
 
-  <!-- Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite">Thanks! Starting download…</div>
 
   <script>
-    // Set year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Smooth scroll for header download CTA
     const dlCta = document.getElementById('download-cta');
     if (dlCta) {
       dlCta.addEventListener('click', (e) => {
@@ -213,8 +185,7 @@
       });
     }
 
-    // Download-after-submit flow (Formspree + immediate DMG download)
-    const DMG_URL = "https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg"; // ← set your link if different
+    const DMG_URL = "https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg";
     const form = document.getElementById("dlform");
     const btn  = document.getElementById("dlbtn");
     const toast = document.getElementById('toast');
@@ -229,14 +200,11 @@
     if (form) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        // UI: lock button state
         const original = btn.textContent;
         btn.textContent = "Downloading…";
         btn.disabled = true;
         showToast('Thanks! Starting download…');
 
-        // include minimal metadata (optional)
         const data = new FormData(form);
         data.append("source", "uninstallr.app");
         data.append("ts", new Date().toISOString());
@@ -247,13 +215,9 @@
             headers: { "Accept": "application/json" },
             body: data
           });
-        } catch (_) {
-          // ignore; still trigger download
-        } finally {
-          // Start the download
+        } catch (_) {}
+        finally {
           window.location.href = DMG_URL;
-
-          // restore button after a moment (in case they come back)
           setTimeout(() => {
             btn.textContent = original;
             btn.disabled = false;
