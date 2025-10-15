@@ -89,6 +89,10 @@
     .fade-up.delay-2 { animation-delay: .3s; }
     .fade-up.delay-3 { animation-delay: .45s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* Tiny toast */
+    .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: #0c0f14; color: var(--text); border: 1px solid var(--ring); padding: 10px 14px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, -4px); }
   </style>
 </head>
 <body>
@@ -112,7 +116,7 @@
         <h1 class="fade-up delay-1">Smart. Clean. Complete uninstalls.</h1>
         <p class="subtitle fade-up delay-2">Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma & Sequoia on Intel and Apple Silicon.</p>
         <div class="fade-up delay-3">
-          <a id="download" class="cta" href="#download">Download for macOS</a>
+          <a id="download-cta" class="cta" href="#download">Download for macOS</a>
           <a class="cta secondary" href="https://github.com/oguzcamurr/uninstallr" target="_blank" rel="noopener">View on GitHub</a>
         </div>
         <div class="badges fade-up delay-3">
@@ -148,15 +152,40 @@
         </div>
       </section>
 
+      <!-- DOWNLOAD: email capture + auto-download -->
       <section id="download">
         <h2 class="section-title">Download</h2>
         <p class="section-sub">Get the latest notarized DMG. Drag-and-drop install to Applications.</p>
-        <p style="text-align:center; margin-top: 16px;">
-          <a class="cta" href="https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg">Download Uninstallr.dmg</a>
+
+        <form id="dlform"
+              action="https://formspree.io/f/XXXXXXXX"  
+              method="POST"
+              style="max-width:520px;margin:16px auto 0;display:flex;gap:8px;">
+          <input type="email" name="email" required
+                 placeholder="Your email for Pro updates"
+                 autocomplete="email"
+                 style="flex:1;background:#0c0f14;border:1px solid var(--ring);color:#e9eef5;border-radius:10px;padding:12px 14px;outline:none;">
+          <!-- Honeypot (spam trap) -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;">
+          <button class="cta" type="submit" id="dlbtn" style="border:0;">Download Free</button>
+        </form>
+
+        <p class="section-sub" style="text-align:center;margin-top:8px;">
+          We’ll email you only about Uninstallr updates. No spam, unsubscribe anytime.
         </p>
-        <p class="section-sub" style="margin-top: 16px;">Verify integrity:
-          <code style="background: #0c0f14; border:1px solid var(--ring); padding:6px 8px; border-radius:8px; color:#cbd5e1;">shasum -a 256 Uninstallr.dmg</code>
+
+        <p class="section-sub" style="margin-top: 16px; text-align:center;">
+          Verify integrity:
+          <code style="background:#0c0f14;border:1px solid var(--ring);padding:6px 8px;border-radius:8px;color:#cbd5e1;">
+            shasum -a 256 Uninstallr.dmg
+          </code>
         </p>
+
+        <noscript>
+          <p class="section-sub" style="text-align:center;margin-top:10px;">
+            JavaScript is disabled — you can <a class="cta" href="https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg">download the DMG directly</a>.
+          </p>
+        </noscript>
       </section>
     </main>
 
@@ -165,9 +194,74 @@
     </footer>
   </div>
 
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Thanks! Starting download…</div>
+
   <script>
     // Set year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for header download CTA
+    const dlCta = document.getElementById('download-cta');
+    if (dlCta) {
+      dlCta.addEventListener('click', (e) => {
+        const target = document.querySelector(dlCta.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Download-after-submit flow (Formspree + immediate DMG download)
+    const DMG_URL = "https://github.com/oguzcamurr/uninstallr/releases/latest/download/Uninstallr.dmg"; // ← set your link if different
+    const form = document.getElementById("dlform");
+    const btn  = document.getElementById("dlbtn");
+    const toast = document.getElementById('toast');
+
+    function showToast(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // UI: lock button state
+        const original = btn.textContent;
+        btn.textContent = "Downloading…";
+        btn.disabled = true;
+        showToast('Thanks! Starting download…');
+
+        // include minimal metadata (optional)
+        const data = new FormData(form);
+        data.append("source", "uninstallr.app");
+        data.append("ts", new Date().toISOString());
+
+        try {
+          await fetch(form.action, {
+            method: "POST",
+            headers: { "Accept": "application/json" },
+            body: data
+          });
+        } catch (_) {
+          // ignore; still trigger download
+        } finally {
+          // Start the download
+          window.location.href = DMG_URL;
+
+          // restore button after a moment (in case they come back)
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.disabled = false;
+            form.reset();
+          }, 2500);
+        }
+      });
+    }
   </script>
 </body>
 </html>
