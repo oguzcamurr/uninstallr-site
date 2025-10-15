@@ -80,18 +80,30 @@
     .fade-up.delay-3 { animation-delay: .45s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+    /* Respect reduced motion: never keep content hidden */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1 !important; transform: none !important; animation: none !important; }
+      body { animation: none !important; }
+    }
+
     .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: #0c0f14; color: var(--text); border: 1px solid var(--ring); padding: 10px 14px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
     .toast.show { opacity: 1; transform: translate(-50%, -4px); }
-      /* Enhanced toast (English only) */
-    @media (prefers-reduced-motion: no-preference) {
-      .toast { transition: opacity .25s ease, transform .25s ease; }
-      .toast.show { animation: toastPop .2s ease-out forwards; }
-      @keyframes toastPop { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, -4px); } }
+  
+    /* Animated background pan */
+    @keyframes bgPan {
+      0%   { background-position: 0% 0%, 80% 0%, 0 0; }
+      100% { background-position: 20% -10%, 60% 10%, 0 0; }
     }
-    .toast svg { width: 16px; height: 16px; margin-right: 8px; vertical-align: -3px; }
+    body { animation: bgPan 18s ease-in-out infinite alternate; }
 
-    /* Subtle animated gradient in hero */
-    .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(600px 300px at 20% 10%, rgba(110,127,255,
+    /* Toast spinner */
+    .toast .spin {
+      display:inline-block; width:14px; height:14px; margin-right:8px;
+      border-radius:50%; border:2px solid rgba(255,255,255,.35);
+      border-top-color:#fff; animation: spin 0.8s linear infinite; vertical-align:-2px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -176,10 +188,15 @@
 
     <footer>
       <div>© <span id="year"></span> Uninstallr. Notarized & stapled. All rights reserved.</div>
+      <div style="margin-top:8px; font-size:13px;">
+        <a href="#" style="color: var(--muted); text-decoration:none; margin:0 6px;">Privacy</a>·
+        <a href="#" style="color: var(--muted); text-decoration:none; margin:0 6px;">Terms</a>·
+        <a href="mailto:oguzcamur@gmail.com" style="color: var(--muted); text-decoration:none; margin:0 6px;">Contact</a>
+      </div>
     </footer>
   </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite">Thanks! Starting download…</div>
+  <div id="toast" class="toast" role="status" aria-live="polite"><span class="spin" aria-hidden="true"></span> Thanks! Starting download…</div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -201,7 +218,7 @@
 
     function showToast(msg) {
       if (!toast) return;
-      toast.textContent = msg;
+      toast.innerHTML = '<span class="spin" aria-hidden="true"></span> ' + (msg || 'Thanks! Starting download…');
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2400);
     }
@@ -235,6 +252,17 @@
         }
       });
     }
+      // Ensure visibility if OS has reduced motion enabled
+    (function(){
+      try {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.querySelectorAll('.fade-up').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+        }
+      } catch(e) { /* no-op */ }
+    })();
   </script>
 </body>
 </html>
