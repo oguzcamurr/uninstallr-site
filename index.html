@@ -82,7 +82,16 @@
 
     .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: #0c0f14; color: var(--text); border: 1px solid var(--ring); padding: 10px 14px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
     .toast.show { opacity: 1; transform: translate(-50%, -4px); }
-  </style>
+      /* Enhanced toast (English only) */
+    @media (prefers-reduced-motion: no-preference) {
+      .toast { transition: opacity .25s ease, transform .25s ease; }
+      .toast.show { animation: toastPop .2s ease-out forwards; }
+      @keyframes toastPop { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, -4px); } }
+    }
+    .toast svg { width: 16px; height: 16px; margin-right: 8px; vertical-align: -3px; }
+
+    /* Subtle animated gradient in hero */
+    .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(600px 300px at 20% 10%, rgba(110,127,255,
 </head>
 <body>
   <div class="container">
