@@ -6,14 +6,16 @@
   <title>Uninstallr for macOS — Smart. Clean. Complete.</title>
   <meta name="description" content="Uninstallr for macOS — smart, clean, complete uninstalls. Notarized & stapled. Universal (Intel + Apple Silicon)." />
 
+  <!-- Social -->
   <meta property="og:title" content="Uninstallr for macOS" />
-  <meta property="og:description" content="Smart, clean, complete uninstalls. Notarized & stapled. Universal (Intel + Apple Silicon)." />
+  <meta property="og:description" content="Smart, clean, complete uninstalls. Notarized by Apple." />
   <meta property="og:image" content="/public/screens/hero.png" />
   <meta property="og:url" content="https://uninstallr.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0f1115" />
 
+  <!-- Icons -->
   <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="/public/screens/app-icon-1024.png" />
 
@@ -27,41 +29,32 @@
       letter-spacing:.01em;
     }
 
+    /* header */
     header {
       display:flex; align-items:center; justify-content:space-between;
       max-width:1120px; margin:0 auto; padding:18px 20px;
     }
-    .brand {
-      display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text);
-    }
-    .brand img {
-      width:38px; height:38px; border-radius:8px; object-fit:contain;
-    }
-    .brand span {
-      font-weight:600; font-size:18px; letter-spacing:0.02em;
-    }
-    nav a {
-      color:var(--muted); text-decoration:none; margin-left:22px; font-size:15px;
-    }
+    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+    .brand img { width:38px; height:38px; border-radius:8px; object-fit:contain; display:block; }
+    .brand span { font-weight:600; font-size:18px; letter-spacing:0.02em; }
+    nav a { color:var(--muted); text-decoration:none; margin-left:22px; font-size:15px; }
     nav a:hover { color:var(--text); }
 
-    .hero {
-      background:url('/public/screens/hero.png') top center / contain no-repeat;
-      text-align:center; padding:180px 20px 140px;
-      border-bottom:1px solid var(--ring);
-      background-color:#0f1115;
-    }
+    /* hero */
+    .hero { text-align:center; padding:64px 20px 32px; border-bottom:1px solid var(--ring); }
     .hero h1 {
       font-size:clamp(28px,4vw,48px); font-weight:700;
       background:linear-gradient(90deg,var(--text),var(--accent2));
       -webkit-background-clip:text; color:transparent;
     }
-    .hero p {
-      max-width:700px; margin:24px auto; color:var(--muted);
-      font-size:18px; line-height:1.6;
+    .hero p { max-width:700px; margin:18px auto 24px; color:var(--muted); font-size:18px; line-height:1.6; }
+    .hero-img {
+      display:block; margin:28px auto 0; width:min(820px,92vw);
+      height:auto; border-radius:16px; border:1px solid var(--ring);
+      box-shadow:0 10px 38px rgba(0,0,0,.35);
     }
     .cta {
-      display:inline-block; margin-top:30px; padding:15px 26px;
+      display:inline-block; margin-top:22px; padding:15px 26px;
       background:linear-gradient(90deg,var(--accent),var(--accent2));
       color:#fff; font-weight:600; border-radius:12px; text-decoration:none;
       box-shadow:0 10px 28px rgba(110,127,255,.25);
@@ -69,29 +62,22 @@
     }
     .cta:hover { transform:translateY(-2px); box-shadow:0 14px 34px rgba(110,127,255,.35); }
 
-    section { max-width:1100px; margin:100px auto; padding:0 20px; text-align:center; }
+    section { max-width:1100px; margin:80px auto; padding:0 20px; text-align:center; }
     h2 { font-size:28px; margin-bottom:12px; }
-    p.section-sub { color:var(--muted); margin-bottom:40px; }
+    p.section-sub { color:var(--muted); margin-bottom:32px; }
+    .shots { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
+    .shots img { width:100%; border-radius:16px; border:1px solid var(--ring); box-shadow:0 4px 20px rgba(0,0,0,.25); }
 
-    .shots {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px;
-    }
-    .shots img {
-      width:100%; border-radius:16px; border:1px solid var(--ring);
-      box-shadow:0 4px 20px rgba(0,0,0,.25);
-    }
-
-    footer {
-      text-align:center; color:var(--muted); font-size:14px;
-      padding:60px 0; border-top:1px solid var(--ring);
-    }
+    footer { text-align:center; color:var(--muted); font-size:14px; padding:60px 0; border-top:1px solid var(--ring); }
   </style>
 </head>
 
 <body>
   <header>
-    <a class="brand" href="#">
-      <img src="/public/screens/logo.svg" alt="Uninstallr Logo" />
+    <a class="brand" href="/">
+      <!-- SVG varsa onu dener, yüklenemezse PNG'ye düşer -->
+      <img src="/public/screens/logo.svg" alt="Uninstallr logo"
+           onerror="this.onerror=null;this.src='/public/screens/app-icon-1024.png';" />
       <span>Uninstallr</span>
     </a>
     <nav>
@@ -101,21 +87,25 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>Smart. Clean. Complete uninstalls.</h1>
-    <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma & Sequoia.</p>
-    <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp">Download for macOS</a>
-  </section>
+  <main>
+    <section class="hero" id="top">
+      <h1>Smart. Clean. Complete uninstalls.</h1>
+      <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
+      <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp">Download for macOS</a>
+      <!-- hero görseli artık ayrı bir <img> -->
+      <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" />
+    </section>
 
-  <section id="screenshots">
-    <h2>See it in action</h2>
-    <p class="section-sub">Uninstallr shows everything before removal — full transparency, full control.</p>
-    <div class="shots">
-      <img src="/public/screens/app-1.png" alt="Scan results" />
-      <img src="/public/screens/app-2.png" alt="Preview leftovers" />
-      <img src="/public/screens/app-3.png" alt="Removal complete" />
-    </div>
-  </section>
+    <section id="screenshots">
+      <h2>See it in action</h2>
+      <p class="section-sub">Uninstallr shows everything before removal — full transparency, full control.</p>
+      <div class="shots">
+        <img src="/public/screens/app-1.png" alt="Scan results" />
+        <img src="/public/screens/app-2.png" alt="Preview leftovers" />
+        <img src="/public/screens/app-3.png" alt="Removal complete" />
+      </div>
+    </section>
+  </main>
 
   <footer>
     © <script>document.write(new Date().getFullYear())</script> Uninstallr. All rights reserved.
