@@ -15,6 +15,8 @@
   <meta name="twitter:description" content="Smart, clean, complete uninstalls. Notarized & stapled." />
   <meta name="theme-color" content="#0f1115" />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://gumroad.com" />
+  <link rel="dns-prefetch" href="https://gumroad.com" />
 
   <!-- SoftwareApplication JSON-LD for SEO -->
   <script type="application/ld+json">
@@ -53,68 +55,212 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,127,255,.18), transparent 50%),
-                  radial-gradient(800px 400px at 80% 0%, rgba(122,215,255,.12), transparent 50%),
-                  linear-gradient(180deg, var(--bg), var(--bg));
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(110,127,255,.18), transparent 50%),
+        radial-gradient(800px 400px at 80% 0%, rgba(122,215,255,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), var(--bg));
       letter-spacing: .01em;
     }
 
-    header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-    .logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(145deg, var(--accent), var(--accent-2)); box-shadow: 0 6px 30px rgba(110,127,255,.35), inset 0 1px 0 rgba(255,255,255,.25); }
+    .logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(145deg, var(--accent), var(--accent-2));
+            box-shadow: 0 6px 30px rgba(110,127,255,.35), inset 0 1px 0 rgba(255,255,255,.25); }
     .brand span { font-weight: 600; font-size: 16px; opacity: .92; }
     nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 14px; position: relative; }
     nav a::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: currentColor; transition: width .2s ease; opacity: .65; }
     nav a:hover::after { width: 100%; }
 
-    .hero { text-align: center; padding: 72px 16px 56px; }
+    .hero { text-align: center; padding: 72px 0 56px; }
     .hero h1 {
       background: linear-gradient(90deg, rgba(233,238,245,1) 0%, rgba(122,215,255,.9) 25%, rgba(233,238,245,1) 50%, rgba(110,127,255,.95) 75%, rgba(233,238,245,1) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
       background-size: 200% auto; animation: titleShine 6s linear infinite;
+      font-size: clamp(28px, 4.8vw, 40px); margin: 0;
     }
     @keyframes titleShine { to { background-position: -200% center; } }
-
-    .subtitle { font-size: clamp(16px, 2.5vw, 20px); color: var(--muted); max-width: 760px; margin: 0 auto 28px; }
+    .subtitle { font-size: clamp(16px, 2.5vw, 20px); color: var(--muted); max-width: 760px; margin: 12px auto 28px; }
 
     .cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 20px; border-radius: 14px; font-weight: 600;
-      text-decoration: none; color: white;
+      display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px;
+      border-radius: 14px; font-weight: 600; text-decoration: none; color: white;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       box-shadow: 0 10px 30px rgba(110,127,255,.28);
       transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
     }
     .cta:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 14px 40px rgba(110,127,255,.42); filter: brightness(1.02); }
+    .cta-ghost { border: 1px solid var(--ring); color: var(--text); background: transparent; }
+
+    .section { padding: 48px 0; }
+    .section-title { text-align: center; font-size: 26px; margin: 0 0 8px; }
+    .section-sub { text-align: center; color: var(--muted); max-width: 720px; margin: 0 auto 24px; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
+    .card { background: rgba(19,22,28,.6); border: 1px solid var(--ring); border-radius: 12px; padding: 18px;
+            backdrop-filter: saturate(120%) blur(6px); transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,.28); border-color: #3a4252; }
+
+    .shots { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+    @media (max-width: 900px) { .shots { grid-template-columns: 1fr; } }
+    .shot { margin:0; background: rgba(19,22,28,.6); border:1px solid var(--ring); border-radius:12px; overflow:hidden; }
+    .shot img { display:block; width:100%; height:auto; }
+    .shot figcaption { padding:10px 12px; font-size:13px; color:var(--muted); border-top:1px solid var(--ring); }
+
+    footer { padding: 24px 0 48px; color: var(--muted); border-top: 1px solid var(--ring); text-align: center; }
+    code.inline { word-break: break-all; }
+    .pill { display:inline-block; font-size:12px; color:var(--muted); border:1px solid var(--ring); padding:6px 10px; border-radius:999px; background: rgba(19,22,28,.55); }
   </style>
 </head>
 <body>
-  <header>
-    <a class="brand" href="#"><div class="logo"></div><span>Uninstallr</span></a>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="#security">Security</a>
-      <a href="#download">Download</a>
-    </nav>
-  </header>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a class="brand" href="#"><div class="logo"></div><span>Uninstallr</span></a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#security">Security</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
 
-  <main>
+    <!-- Hero -->
     <section class="hero">
       <h1>Smart. Clean. Complete uninstalls.</h1>
-      <p class="subtitle">Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma & Sequoia.</p>
+      <p class="subtitle">
+        Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more.
+        Notarized by Apple and ready for Sonoma &amp; Sequoia on Intel and Apple Silicon.
+      </p>
       <div>
-        <a class="cta" href="#download">Download for macOS</a>
+        <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp?utm_source=site&utm_medium=hero&utm_campaign=v1">Buy Pro — $19</a>
+        <a class="cta cta-ghost" href="#download" style="margin-left:10px;">Download</a>
+      </div>
+      <div style="margin-top:12px" class="pill">Notarized &amp; stapled • Universal binary</div>
+    </section>
+
+    <!-- Download -->
+    <section id="download" class="section">
+      <h2 class="section-title">Download</h2>
+      <p class="section-sub">Get the notarized DMG. Drag-and-drop to Applications.</p>
+      <div style="text-align:center">
+        <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp?utm_source=site&utm_medium=download&utm_campaign=v1">Buy Pro — $19</a>
+        <div style="margin-top:12px; font-size:12px; color:#a6b0c3;">
+          File: <code class="inline">Uninstallr-1.0.0.dmg</code> • ~2.8 MB
+        </div>
       </div>
     </section>
-  </main>
 
-  <footer style="text-align:center;color:#a6b0c3;padding:24px 0;border-top:1px solid #2a2f3a">
-    © <span id="year"></span> Uninstallr. All rights reserved.
-  </footer>
+    <!-- Security / Trust -->
+    <section id="security" class="section">
+      <h2 class="section-title">Security & Trust</h2>
+      <p class="section-sub">Signed. Notarized. Transparent.</p>
+      <div class="card" style="max-width:860px;margin:0 auto;">
+        <ul style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <li><strong>Notarization:</strong> ✔ stapled</li>
+          <li><strong>Codesign:</strong> Developer ID Application: Oguz Camur (3B2P2A675J)</li>
+          <li><strong>Minimum macOS:</strong> 13+ (Ventura or later)</li>
+          <li><strong>Binary:</strong> Universal (Apple Silicon & Intel)</li>
+          <li style="grid-column:1 / -1;">
+            <strong>SHA-256 (v1.0.0):</strong>
+            <code id="hash" class="inline">b1a15320b66dd8dfa376c08262428bf1b6df6f427e6505a97d77c021e66841bd</code>
+            <button id="copyHash" class="cta-ghost" style="margin-left:8px; font-size:12px; padding:6px 10px; border-radius:999px;">Copy</button>
+            <span id="copyState" style="margin-left:8px; font-size:12px; color:#a6b0c3;"></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="section">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Three simple steps to a truly clean uninstall.</p>
+      <div class="grid-3">
+        <div class="card"><h3 style="margin:0 0 6px;">1) Find</h3><p style="margin:0;color:#a6b0c3">Select the app or drop the <code class="inline">.app</code>.</p></div>
+        <div class="card"><h3 style="margin:0 0 6px;">2) Preview</h3><p style="margin:0;color:#a6b0c3">See every related file and the total size before removal.</p></div>
+        <div class="card"><h3 style="margin:0 0 6px;">3) Remove</h3><p style="margin:0;color:#a6b0c3">One click to clean. Pro adds force-uninstall and process termination.</p></div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <h2 class="section-title">Features</h2>
+      <p class="section-sub">Everything you need for a clean, safe uninstall.</p>
+      <div class="grid-3">
+        <div class="card">One-click clean uninstall</div>
+        <div class="card">Full leftover scan (caches, prefs, logs, containers)</div>
+        <div class="card">Preview & total size estimate</div>
+        <div class="card">Quit / Force-quit processes (Pro)</div>
+        <div class="card">Move app bundle to Trash (reversible)</div>
+        <div class="card">Reveal in Finder, copy paths</div>
+      </div>
+    </section>
+
+    <!-- Screenshots (placeholders; swap with real images) -->
+    <section id="screenshots" class="section">
+      <h2 class="section-title">Screenshots</h2>
+      <p class="section-sub">A quick peek at Uninstallr in action.</p>
+      <div class="shots">
+        <figure class="shot">
+          <img src="/hero-shot.png" alt="Uninstallr — hero shot" loading="lazy">
+          <figcaption>Hero / overview</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/screens/app-1.png" alt="Select & scan" loading="lazy">
+          <figcaption>1. Select an app and scan</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/screens/app-2.png" alt="Preview leftovers" loading="lazy">
+          <figcaption>2. Preview leftovers</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ (short) -->
+    <section id="faq" class="section">
+      <h2 class="section-title">FAQ</h2>
+      <div class="card" style="max-width:860px;margin:0 auto;">
+        <details style="margin:6px 0;">
+          <summary><strong>Is Uninstallr safe?</strong></summary>
+          <p style="color:#a6b0c3;margin:8px 0 0">Yes. It’s signed with Developer ID and notarized by Apple. You always get a clear preview before removing anything.</p>
+        </details>
+        <details style="margin:6px 0;">
+          <summary><strong>What macOS versions are supported?</strong></summary>
+          <p style="color:#a6b0c3;margin:8px 0 0">Built for macOS 13+ (Ventura and later), Universal Binary for Apple Silicon and Intel.</p>
+        </details>
+        <details style="margin:6px 0;">
+          <summary><strong>Lite vs Pro?</strong></summary>
+          <p style="color:#a6b0c3;margin:8px 0 0">Lite analyzes and reports. Pro fully removes apps and leftovers with process control and force-uninstall.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      © <span id="year"></span> Uninstallr. All rights reserved. •
+      <a href="/privacy.html" style="color:#e9eef5">Privacy</a> •
+      <a href="/terms.html" style="color:#e9eef5">Terms</a>
+    </footer>
+  </div>
 
   <script>
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy SHA-256
+    document.getElementById('copyHash')?.addEventListener('click', async () => {
+      const t = document.getElementById('hash')?.textContent?.trim() || '';
+      try {
+        await navigator.clipboard.writeText(t);
+        document.getElementById('copyState').textContent = 'Copied!';
+        setTimeout(()=>document.getElementById('copyState').textContent='',1500);
+      } catch(e) {
+        document.getElementById('copyState').textContent = 'Copy failed';
+        setTimeout(()=>document.getElementById('copyState').textContent='',1500);
+      }
+    });
   </script>
 </body>
 </html>
