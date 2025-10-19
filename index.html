@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Uninstallr for macOS — Smart. Clean. Complete.</title>
-  <meta name="description" content="Uninstallr for macOS — smart, clean, complete uninstalls. Notarized & stapled. Universal (Intel + Apple Silicon)." />
+  <meta name="description" content="One-click clean uninstall for macOS that removes all leftovers — caches, containers, preferences, logs. Notarized by Apple. Universal (Intel + Apple Silicon)." />
   <meta name="theme-color" content="#0f1115" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Uninstallr for macOS" />
-  <meta property="og:description" content="Smart, clean, complete uninstalls. Notarized by Apple." />
+  <meta property="og:description" content="Clean your Mac like it never existed. One-click uninstall with full leftover removal. Notarized by Apple." />
   <meta property="og:image" content="/public/screens/hero.png" />
   <meta property="og:url" content="https://uninstallr.app" />
   <meta property="og:type" content="website" />
@@ -19,11 +19,27 @@
   <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="/public/screens/app-icon-1024.png" />
 
-  <!-- Perf: Preload hero -->
+  <!-- Perf -->
   <link rel="preload" as="image" href="/public/screens/hero.png" imagesrcset="/public/screens/hero.png 1x" />
 
+  <!-- FAQ Schema (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What’s the difference between Lite and Pro?",
+       "acceptedAnswer":{"@type":"Answer","text":"Lite analyzes and exports reports; Pro fully removes apps and leftovers, with process control and force uninstall."}},
+      {"@type":"Question","name":"Is it safe?",
+       "acceptedAnswer":{"@type":"Answer","text":"Yes. Uninstallr Pro is notarized by Apple and signed with a Developer ID certificate."}},
+      {"@type":"Question","name":"Supported macOS versions?",
+       "acceptedAnswer":{"@type":"Answer","text":"macOS 13 Ventura and newer (Sonoma & Sequoia ready). Universal binary for Apple Silicon and Intel."}}
+    ]
+  }
+  </script>
+
   <style>
-    :root { --bg:#0f1115; --text:#e9eef5; --muted:#a6b0c3; --accent:#6e7fff; --accent2:#7ad7ff; --ring:#2a2f3a; }
+    :root { --bg:#0f1115; --text:#e9eef5; --muted:#a6b0c3; --accent:#22C55E; --accent2:#7ad7ff; --ring:#2a2f3a; }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -40,6 +56,13 @@
     nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:15px}
     nav a:hover{color:var(--text)}
 
+    /* Buttons */
+    .btn{display:inline-block;padding:14px 22px;border-radius:12px;font-weight:600;text-decoration:none}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399); color:#001b10}
+    .btn-primary:hover{filter:brightness(1.02)}
+    .btn-ghost{border:1px solid var(--ring); color:var(--text)}
+    .btn-ghost:hover{border-color:#3b4354}
+
     /* Hero */
     .hero{max-width:1200px;margin:0 auto;padding:56px 20px 24px;text-align:center}
     .hero h1{
@@ -48,17 +71,15 @@
       -webkit-background-clip:text;color:transparent
     }
     .hero p{max-width:780px;margin:18px auto 24px;color:var(--muted);font-size:18px;line-height:1.6}
-    .cta{
-      display:inline-block;margin-top:8px;padding:15px 26px;border-radius:12px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#fff;font-weight:600;text-decoration:none;
-      box-shadow:0 10px 28px rgba(110,127,255,.25);transition:transform .2s,box-shadow .2s
-    }
-    .cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(110,127,255,.35)}
+    .hero-ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
     .hero-img{
       display:block;margin:28px auto 0;width:min(900px,95vw);
       height:auto;border-radius:16px;border:1px solid var(--ring);box-shadow:0 10px 38px rgba(0,0,0,.35)
     }
+
+    /* Trust strip */
+    .trust{max-width:1200px;margin:22px auto 0;padding:0 20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    .badge{font-size:12px;color:var(--muted);border:1px solid var(--ring);padding:6px 10px;border-radius:999px;background:rgba(19,22,28,.55)}
 
     /* Sections */
     section{max-width:1280px;margin:90px auto;padding:0 24px;text-align:center}
@@ -75,12 +96,22 @@
     .shots a{display:block;width:100%}
     .shots img{width:100%;border-radius:16px;border:1px solid var(--ring);box-shadow:0 6px 28px rgba(0,0,0,.35)}
 
-    /* Lightbox */
-    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999;padding:24px}
-    #lightbox img{max-width:min(1600px,96vw);max-height:92vh;border-radius:12px;border:1px solid #2a2f3a;box-shadow:0 12px 48px rgba(0,0,0,.6)}
-    #lightbox.close-hint::after{content:"Click or press Esc to close";position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:#cbd5e1;font-size:12px;opacity:.8}
+    /* Security/Hash */
+    .panel{background:rgba(19,22,28,.55);border:1px solid var(--ring);border-radius:14px;padding:16px;max-width:860px;margin:0 auto}
+    .kv{display:grid;grid-template-columns:160px 1fr;gap:10px;text-align:left}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b0f16;border:1px solid var(--ring);padding:10px;border-radius:8px;word-break:break-all}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .copy{cursor:pointer;border:1px solid var(--ring);padding:8px 10px;border-radius:8px;background:#121721;color:#d1d7e5}
+
+    /* FAQ */
+    .faq{max-width:860px;margin:0 auto;text-align:left}
+    .faq details{background:rgba(19,22,28,.55);border:1px solid var(--ring);border-radius:12px;padding:12px 14px;margin:10px 0}
+    .faq summary{cursor:pointer;font-weight:600;color:var(--text)}
+    .faq p{color:var(--muted);margin:8px 0 0}
 
     footer{text-align:center;color:var(--muted);font-size:14px;padding:60px 0;border-top:1px solid var(--ring);margin-top:80px}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--text)}
   </style>
 </head>
 <body>
@@ -96,6 +127,7 @@
       <nav>
         <a href="#features">Features</a>
         <a href="#screenshots">Screens</a>
+        <a href="#security">Security</a>
         <a href="#download">Download</a>
       </nav>
     </div>
@@ -106,9 +138,20 @@
     <section class="hero" id="top">
       <h1>Smart. Clean. Complete uninstalls.</h1>
       <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
-      <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp">Download for macOS</a>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://oguzcamur.gumroad.com/l/wmtqmp">Buy Pro — $19</a>
+        <a class="btn btn-ghost" href="#lite">Get Lite (App Store)</a>
+      </div>
       <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" decoding="async" />
     </section>
+
+    <!-- Social proof / trust -->
+    <div class="trust" aria-label="Trust information">
+      <span class="badge">Notarized by Apple</span>
+      <span class="badge">Codesigned (Developer ID)</span>
+      <span class="badge">Universal Binary (Apple Silicon & Intel)</span>
+      <span class="badge">No kernel extensions</span>
+    </div>
 
     <!-- Screenshots -->
     <section id="screenshots">
@@ -121,24 +164,94 @@
       </div>
     </section>
 
-    <!-- (placeholder anchors so nav links çalışsın) -->
+    <!-- Security / Hash -->
+    <section id="security">
+      <h2>Security & Integrity</h2>
+      <p class="section-sub">Verify your download and see the signing details.</p>
+      <div class="panel">
+        <div class="kv">
+          <div>Version</div><div>1.0.0 (DMG: <strong>Uninstallr-1.0.0.dmg</strong>)</div>
+          <div>Supported macOS</div><div>13+ (Ventura, Sonoma, Sequoia)</div>
+          <div>Codesign</div><div>Developer ID Application: Oguz Camur (3B2P2A675J)</div>
+          <div>Notarization</div><div>Apple Notarized (stapled)</div>
+          <div>SHA-256</div>
+          <div class="row">
+            <code id="sha" class="code">b1a15320b66dd8dfa376c08262428bf1b6df6f427e6505a97d77c021e66841bd</code>
+            <button id="copy" class="copy" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Uninstallr Lite vs Pro?</summary>
+          <p><strong>Lite</strong>: analyze & report only. <strong>Pro</strong>: full removal of apps and leftovers, with process control and force uninstall.</p>
+        </details>
+        <details>
+          <summary>Is it safe?</summary>
+          <p>Yes. Uninstallr is notarized by Apple and signed with a Developer ID certificate. You always preview files before removal.</p>
+        </details>
+        <details>
+          <summary>Refund policy?</summary>
+          <p>30-day no-questions-asked refund via Gumroad.</p>
+        </details>
+        <details>
+          <summary>Support?</summary>
+          <p>Email us at <a href="mailto:support@uninstallr.app">support@uninstallr.app</a>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- (placeholders so nav links work; content is above) -->
     <section id="features" aria-hidden="true" style="padding:0;margin:0"></section>
-    <section id="download" aria-hidden="true" style="padding:0;margin:0"></section>
+
+    <!-- Download / CTA -->
+    <section id="download">
+      <h2>Download</h2>
+      <p class="section-sub">Get the latest notarized build. Drag the app to Applications.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://oguzcamur.gumroad.com/l/wmtqmp">Buy Pro — $19</a>
+        <a class="btn btn-ghost" id="lite" href="#">Get Lite on the Mac App Store (soon)</a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    © <script>document.write(new Date().getFullYear())</script> Uninstallr. All rights reserved.
+    <div style="margin-bottom:10px">
+      <a href="/privacy.html">Privacy</a> ·
+      <a href="/terms.html">Terms</a> ·
+      <a href="mailto:support@uninstallr.app">Contact</a>
+    </div>
+    © <span id="year"></span> Uninstallr. All rights reserved.
   </footer>
 
-  <!-- Lightbox script -->
-  <script>
-    (function(){
-      const lb = document.createElement('div');
-      lb.id = 'lightbox'; lb.className = 'close-hint';
-      lb.innerHTML = '<img alt="Preview">';
-      document.body.appendChild(lb);
-      const lbImg = lb.querySelector('img');
+  <!-- Lightbox -->
+  <div id="lightbox" class="close-hint" aria-hidden="true" style="display:none;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;padding:24px">
+    <img alt="Preview" style="max-width:min(1600px,96vw);max-height:92vh;border-radius:12px;border:1px solid #2a2f3a;box-shadow:0 12px 48px rgba(0,0,0,.6)">
+  </div>
 
+  <!-- Scripts -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy SHA
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(document.getElementById('sha').textContent.trim());
+        const btn = document.getElementById('copy');
+        const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1400);
+      } catch(e) { alert('Could not copy.'); }
+    });
+
+    // Lightbox
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const lbImg = lb.querySelector('img');
       document.querySelectorAll('.shots a').forEach(a=>{
         a.addEventListener('click', e=>{
           e.preventDefault();
@@ -147,14 +260,13 @@
           lb.setAttribute('aria-hidden','false');
         });
       });
-      function closeLB(){
-        lb.style.display = 'none';
-        lb.setAttribute('aria-hidden','true');
-        lbImg.removeAttribute('src');
-      }
+      function closeLB(){ lb.style.display='none'; lb.setAttribute('aria-hidden','true'); lbImg.removeAttribute('src'); }
       lb.addEventListener('click', closeLB);
       document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
     })();
   </script>
+
+  <!-- Plausible (privacy-friendly analytics) -->
+  <script defer data-domain="uninstallr.app" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>
