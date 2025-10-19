@@ -5,110 +5,156 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Uninstallr for macOS — Smart. Clean. Complete.</title>
   <meta name="description" content="Uninstallr for macOS — smart, clean, complete uninstalls. Notarized & stapled. Universal (Intel + Apple Silicon)." />
+  <meta name="theme-color" content="#0f1115" />
 
-  <!-- Social -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Uninstallr for macOS" />
   <meta property="og:description" content="Smart, clean, complete uninstalls. Notarized by Apple." />
   <meta property="og:image" content="/public/screens/hero.png" />
   <meta property="og:url" content="https://uninstallr.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#0f1115" />
 
   <!-- Icons -->
   <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="/public/screens/app-icon-1024.png" />
 
+  <!-- Perf: Preload hero -->
+  <link rel="preload" as="image" href="/public/screens/hero.png" imagesrcset="/public/screens/hero.png 1x" />
+
   <style>
     :root { --bg:#0f1115; --text:#e9eef5; --muted:#a6b0c3; --accent:#6e7fff; --accent2:#7ad7ff; --ring:#2a2f3a; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body {
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      letter-spacing:.01em;
+      color:var(--text); background:var(--bg); letter-spacing:.01em;
     }
 
-    /* header */
-    header {
-      display:flex; align-items:center; justify-content:space-between;
-      max-width:1120px; margin:0 auto; padding:18px 20px;
-    }
-    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
-    .brand img { width:38px; height:38px; border-radius:8px; object-fit:contain; display:block; }
-    .brand span { font-weight:600; font-size:18px; letter-spacing:0.02em; }
-    nav a { color:var(--muted); text-decoration:none; margin-left:22px; font-size:15px; }
-    nav a:hover { color:var(--text); }
+    /* Header */
+    header{position:sticky;top:0;backdrop-filter:saturate(120%) blur(8px);
+      background:rgba(15,17,21,.55); border-bottom:1px solid rgba(42,47,58,.6); z-index:10}
+    .nav{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+    .brand img{width:38px;height:38px;border-radius:8px;object-fit:contain;display:block}
+    .brand span{font-weight:600;font-size:18px;letter-spacing:.02em}
+    nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:15px}
+    nav a:hover{color:var(--text)}
 
-    /* hero */
-    .hero { text-align:center; padding:64px 20px 32px; border-bottom:1px solid var(--ring); }
-    .hero h1 {
-      font-size:clamp(28px,4vw,48px); font-weight:700;
+    /* Hero */
+    .hero{max-width:1200px;margin:0 auto;padding:56px 20px 24px;text-align:center}
+    .hero h1{
+      font-size:clamp(28px,4vw,48px);font-weight:700;
       background:linear-gradient(90deg,var(--text),var(--accent2));
-      -webkit-background-clip:text; color:transparent;
+      -webkit-background-clip:text;color:transparent
     }
-    .hero p { max-width:700px; margin:18px auto 24px; color:var(--muted); font-size:18px; line-height:1.6; }
-    .hero-img {
-      display:block; margin:28px auto 0; width:min(820px,92vw);
-      height:auto; border-radius:16px; border:1px solid var(--ring);
-      box-shadow:0 10px 38px rgba(0,0,0,.35);
-    }
-    .cta {
-      display:inline-block; margin-top:22px; padding:15px 26px;
+    .hero p{max-width:780px;margin:18px auto 24px;color:var(--muted);font-size:18px;line-height:1.6}
+    .cta{
+      display:inline-block;margin-top:8px;padding:15px 26px;border-radius:12px;
       background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#fff; font-weight:600; border-radius:12px; text-decoration:none;
-      box-shadow:0 10px 28px rgba(110,127,255,.25);
-      transition:transform .2s ease,box-shadow .2s ease;
+      color:#fff;font-weight:600;text-decoration:none;
+      box-shadow:0 10px 28px rgba(110,127,255,.25);transition:transform .2s,box-shadow .2s
     }
-    .cta:hover { transform:translateY(-2px); box-shadow:0 14px 34px rgba(110,127,255,.35); }
+    .cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(110,127,255,.35)}
+    .hero-img{
+      display:block;margin:28px auto 0;width:min(900px,95vw);
+      height:auto;border-radius:16px;border:1px solid var(--ring);box-shadow:0 10px 38px rgba(0,0,0,.35)
+    }
 
-    section { max-width:1100px; margin:80px auto; padding:0 20px; text-align:center; }
-    h2 { font-size:28px; margin-bottom:12px; }
-    p.section-sub { color:var(--muted); margin-bottom:32px; }
-    .shots { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
-    .shots img { width:100%; border-radius:16px; border:1px solid var(--ring); box-shadow:0 4px 20px rgba(0,0,0,.25); }
+    /* Sections */
+    section{max-width:1280px;margin:90px auto;padding:0 24px;text-align:center}
+    h2{font-size:28px;margin-bottom:12px}
+    .section-sub{color:var(--muted);margin-bottom:32px}
 
-    footer { text-align:center; color:var(--muted); font-size:14px; padding:60px 0; border-top:1px solid var(--ring); }
+    /* Screenshots */
+    .shots{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(420px,1fr));
+      gap:24px;align-items:start;justify-items:center
+    }
+    @media (min-width:1400px){ .shots{grid-template-columns:repeat(3,minmax(420px,1fr))} }
+    .shots a{display:block;width:100%}
+    .shots img{width:100%;border-radius:16px;border:1px solid var(--ring);box-shadow:0 6px 28px rgba(0,0,0,.35)}
+
+    /* Lightbox */
+    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999;padding:24px}
+    #lightbox img{max-width:min(1600px,96vw);max-height:92vh;border-radius:12px;border:1px solid #2a2f3a;box-shadow:0 12px 48px rgba(0,0,0,.6)}
+    #lightbox.close-hint::after{content:"Click or press Esc to close";position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:#cbd5e1;font-size:12px;opacity:.8}
+
+    footer{text-align:center;color:var(--muted);font-size:14px;padding:60px 0;border-top:1px solid var(--ring);margin-top:80px}
   </style>
 </head>
-
 <body>
+
+  <!-- Header -->
   <header>
-    <a class="brand" href="/">
-      <!-- SVG varsa onu dener, yüklenemezse PNG'ye düşer -->
-      <img src="/public/screens/logo.svg" alt="Uninstallr logo"
-           onerror="this.onerror=null;this.src='/public/screens/app-icon-1024.png';" />
-      <span>Uninstallr</span>
-    </a>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#screenshots">Screens</a>
-      <a href="#download">Download</a>
-    </nav>
+    <div class="nav">
+      <a class="brand" href="/">
+        <img src="/public/screens/logo.svg" alt="Uninstallr logo"
+             onerror="this.onerror=null;this.src='/public/screens/app-icon-1024.png';" />
+        <span>Uninstallr</span>
+      </a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screens</a>
+        <a href="#download">Download</a>
+      </nav>
+    </div>
   </header>
 
+  <!-- Hero -->
   <main>
     <section class="hero" id="top">
       <h1>Smart. Clean. Complete uninstalls.</h1>
       <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
       <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp">Download for macOS</a>
-      <!-- hero görseli artık ayrı bir <img> -->
-      <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" />
+      <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" decoding="async" />
     </section>
 
+    <!-- Screenshots -->
     <section id="screenshots">
       <h2>See it in action</h2>
       <p class="section-sub">Uninstallr shows everything before removal — full transparency, full control.</p>
       <div class="shots">
-        <img src="/public/screens/app-1.png" alt="Scan results" />
-        <img src="/public/screens/app-2.png" alt="Preview leftovers" />
-        <img src="/public/screens/app-3.png" alt="Removal complete" />
+        <a href="/public/screens/app-1.png"><img src="/public/screens/app-1.png" alt="Scan results" loading="lazy" decoding="async" /></a>
+        <a href="/public/screens/app-2.png"><img src="/public/screens/app-2.png" alt="Preview leftovers" loading="lazy" decoding="async" /></a>
+        <a href="/public/screens/app-3.png"><img src="/public/screens/app-3.png" alt="Removal complete" loading="lazy" decoding="async" /></a>
       </div>
     </section>
+
+    <!-- (placeholder anchors so nav links çalışsın) -->
+    <section id="features" aria-hidden="true" style="padding:0;margin:0"></section>
+    <section id="download" aria-hidden="true" style="padding:0;margin:0"></section>
   </main>
 
   <footer>
     © <script>document.write(new Date().getFullYear())</script> Uninstallr. All rights reserved.
   </footer>
+
+  <!-- Lightbox script -->
+  <script>
+    (function(){
+      const lb = document.createElement('div');
+      lb.id = 'lightbox'; lb.className = 'close-hint';
+      lb.innerHTML = '<img alt="Preview">';
+      document.body.appendChild(lb);
+      const lbImg = lb.querySelector('img');
+
+      document.querySelectorAll('.shots a').forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          lbImg.src = a.getAttribute('href');
+          lb.style.display = 'flex';
+          lb.setAttribute('aria-hidden','false');
+        });
+      });
+      function closeLB(){
+        lb.style.display = 'none';
+        lb.setAttribute('aria-hidden','true');
+        lbImg.removeAttribute('src');
+      }
+      lb.addEventListener('click', closeLB);
+      document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
+    })();
+  </script>
 </body>
 </html>
