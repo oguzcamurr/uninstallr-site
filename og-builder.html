@@ -1,0 +1,88 @@
+<!DOCTYPE html><meta charset="utf-8">
+<title>OG Builder — Uninstallr</title>
+<style>
+  html,body{margin:0;height:100%;background:#0f1115;color:#e9eef5;font:16px -apple-system,BlinkMacSystemFont,"SF Pro Text",Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{display:grid;place-items:center;height:100%;gap:16px}
+  canvas{border:1px solid #2a2f3a;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .row{display:flex;gap:8px}
+  button{padding:10px 14px;border-radius:10px;border:1px solid #2a2f3a;background:#121821;color:#e9eef5;cursor:pointer}
+  button:hover{filter:brightness(1.05)}
+</style>
+<div class="wrap">
+  <canvas id="c" width="1200" height="630"></canvas>
+  <div class="row">
+    <button id="dl">Download PNG (1200×630)</button>
+  </div>
+</div>
+<script>
+(async function(){
+  const c = document.getElementById('c'); const ctx = c.getContext('2d');
+
+  // BG gradient
+  const g = ctx.createLinearGradient(0,0,1200,630);
+  g.addColorStop(0,'#0f1115'); g.addColorStop(.6,'#151a23'); g.addColorStop(1,'#18202a');
+  ctx.fillStyle = g; ctx.fillRect(0,0,c.width,c.height);
+
+  // soft vignette
+  const vg = ctx.createRadialGradient(600,315,60,600,315,520);
+  vg.addColorStop(0,'rgba(34,197,94,.18)'); vg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = vg; ctx.fillRect(0,0,1200,630);
+
+  // logo (falls back to rounded square if load fails)
+  const drawLogo = (img)=>{
+    const x=80,y=76,w=72,h=72, r=16;
+    if(!img){
+      ctx.fillStyle='#1f2937'; // fallback bg
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r);
+      ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r);
+      ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); ctx.fill();
+      // U letter
+      ctx.fillStyle='#22C55E'; ctx.fillRect(x+20,y+20,32,40);
+      ctx.beginPath(); ctx.arc(x+36,y+60,16,0,Math.PI,true); ctx.fill();
+      return;
+    }
+    ctx.save(); ctx.shadowColor='rgba(0,0,0,.45)'; ctx.shadowBlur=18;
+    ctx.drawImage(img,x,y,w,h); ctx.restore();
+  };
+  try {
+    const img = new Image(); img.crossOrigin='anonymous';
+    img.src = '/public/screens/logo.svg';
+    await img.decode(); drawLogo(img);
+  } catch { drawLogo(null); }
+
+  // Headline
+  ctx.fillStyle='#dff7ff';
+  ctx.font='700 64px SF Pro Display, -apple-system, Segoe UI, Roboto';
+  ctx.fillText('Smart. Clean. Complete uninstalls.', 80, 220);
+
+  // Tagline
+  ctx.fillStyle='#9bd5d6';
+  ctx.font='400 28px SF Pro Text, -apple-system, Segoe UI, Roboto';
+  const tagline='Notarized by Apple — Ready for Sonoma & Sequoia';
+  ctx.fillText(tagline, 80, 270);
+
+  // App tile (nice glow)
+  const tile = new Image(); tile.src='/public/screens/hero.png';
+  try { await tile.decode(); } catch {}
+  if (tile.width) {
+    ctx.save();
+    ctx.shadowColor='rgba(34,197,94,.35)'; ctx.shadowBlur=40; ctx.shadowOffsetY=10;
+    const w=360,h=204,x=760,y=110; ctx.drawImage(tile,x,y,w,h);
+    ctx.restore();
+  }
+
+  // URL & brand
+  ctx.fillStyle='#7ad7ff'; ctx.font='600 24px SF Pro Text, -apple-system';
+  ctx.fillText('uninstallr.app', 80, 560);
+  ctx.strokeStyle='rgba(122,215,255,.35)'; ctx.lineWidth=1;
+  ctx.strokeRect(72, 70, 88, 90);
+
+  // download
+  document.getElementById('dl').onclick = ()=>{
+    const a=document.createElement('a');
+    a.download='og-image.png';
+    a.href=c.toDataURL('image/png'); a.click();
+  };
+})();
+</script>
