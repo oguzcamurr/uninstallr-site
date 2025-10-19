@@ -8,17 +8,19 @@
   <meta name="description" content="One-click clean uninstall for macOS that removes all leftovers — caches, containers, preferences, logs. Notarized by Apple. Universal (Intel + Apple Silicon)." />
   <meta name="theme-color" content="#0f1115" />
   <link rel="canonical" href="https://uninstallr.app/" />
+  <meta name="apple-mobile-web-app-title" content="Uninstallr" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Uninstallr for macOS" />
+  <meta property="og:site_name" content="Uninstallr" />
   <meta property="og:description" content="Clean your Mac like it never existed. One-click uninstall with full leftover removal. Notarized by Apple." />
-  <meta property="og:image" content="/public/screens/og-image.png" />
+  <meta property="og:image" content="https://uninstallr.app/public/screens/og-image.png" />
   <meta property="og:url" content="https://uninstallr.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Uninstallr for macOS" />
   <meta name="twitter:description" content="Smart, clean, complete uninstalls. Notarized by Apple." />
-  <meta name="twitter:image" content="/public/screens/og-image.png" />
+  <meta name="twitter:image" content="https://uninstallr.app/public/screens/og-image.png" />
 
   <!-- Icons -->
   <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
@@ -26,6 +28,10 @@
 
   <!-- Perf -->
   <link rel="preload" as="image" href="/public/screens/hero.png" imagesrcset="/public/screens/hero.png 1x" />
+  <link rel="dns-prefetch" href="https://plausible.io">
+  <link rel="preconnect" href="https://plausible.io" crossorigin>
+  <link rel="dns-prefetch" href="https://buy.uninstallr.app">
+  <link rel="preconnect" href="https://buy.uninstallr.app" crossorigin>
 
   <!-- FAQ Schema (SEO) -->
   <script type="application/ld+json">
@@ -144,7 +150,7 @@
       <h1>Smart. Clean. Complete uninstalls.</h1>
       <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://oguzcamur.gumroad.com/l/wmtqmp">Buy Pro — $19</a>
+        <a class="btn btn-primary" href="https://buy.uninstallr.app" rel="noopener">Buy Pro — $19</a>
         <a class="btn btn-ghost" href="#lite">Get Lite (App Store)</a>
       </div>
       <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" decoding="async" />
@@ -219,7 +225,7 @@
       <h2>Download</h2>
       <p class="section-sub">Get the latest notarized build. Drag the app to Applications.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://oguzcamur.gumroad.com/l/wmtqmp">Buy Pro — $19</a>
+        <a class="btn btn-primary" href="https://buy.uninstallr.app" rel="noopener">Buy Pro — $19</a>
         <a class="btn btn-ghost" id="lite" href="#">Get Lite on the Mac App Store (soon)</a>
       </div>
     </section>
@@ -275,4 +281,3 @@
   <script defer data-domain="uninstallr.app" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>
-
