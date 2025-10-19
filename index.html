@@ -8,7 +8,7 @@
 
   <meta property="og:title" content="Uninstallr for macOS" />
   <meta property="og:description" content="Smart, clean, complete uninstalls. Notarized & stapled. Universal (Intel + Apple Silicon)." />
-  <meta property="og:image" content="/screens/hero.png" />
+  <meta property="og:image" content="/public/screens/hero.png" />
   <meta property="og:url" content="https://uninstallr.app" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -16,11 +16,11 @@
   <meta name="twitter:description" content="Smart, clean, complete uninstalls. Notarized & stapled." />
   <meta name="theme-color" content="#0f1115" />
 
-  <link rel="icon" href="/screens/favicon-32.png" sizes="32x32" />
-  <link rel="icon" href="/screens/favicon-180.png" sizes="180x180" />
-  <link rel="apple-touch-icon" href="/screens/app-icon-1024.png" />
+  <!-- NOTE: assets live under /public/screens/, so URLs start with /public/screens/... -->
+  <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/public/screens/favicon-180.png" sizes="180x180" />
+  <link rel="apple-touch-icon" href="/public/screens/app-icon-1024.png" />
 
-  <!-- SEO Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,7 +55,7 @@
     nav a:hover{color:var(--text);}
 
     .hero {
-      background:url('/screens/hero.png') center 50% / cover no-repeat;
+      background:url('/public/screens/hero.png') center 50% / cover no-repeat;
       text-align:center;padding:120px 20px 100px;border-bottom:1px solid var(--ring);
     }
     .hero h1{
@@ -86,7 +86,7 @@
 <body>
   <header>
     <a class="brand" href="#">
-      <img src="/screens/logo.svg" alt="Uninstallr Logo">
+      <img src="/public/screens/logo.svg" alt="Uninstallr Logo">
       <span>Uninstallr</span>
     </a>
     <nav>
@@ -98,7 +98,7 @@
 
   <section class="hero">
     <h1>Smart. Clean. Complete uninstalls.</h1>
-    <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma & Sequoia.</p>
+    <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
     <a class="cta" href="https://oguzcamur.gumroad.com/l/wmtqmp">Download for macOS</a>
   </section>
 
@@ -106,9 +106,9 @@
     <h2>See it in action</h2>
     <p class="section-sub">Uninstallr shows everything before removal — full transparency, full control.</p>
     <div class="shots">
-      <img src="/screens/app-1.png" alt="Scan results">
-      <img src="/screens/app-2.png" alt="Preview leftovers">
-      <img src="/screens/app-3.png" alt="Removal complete">
+      <img src="/public/screens/app-1.png" alt="Scan results">
+      <img src="/public/screens/app-2.png" alt="Preview leftovers">
+      <img src="/public/screens/app-3.png" alt="Removal complete">
     </div>
   </section>
 
