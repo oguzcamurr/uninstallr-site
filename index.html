@@ -52,6 +52,7 @@
   <style>
     :root { --bg:#0f1115; --text:#e9eef5; --muted:#a6b0c3; --accent:#22C55E; --accent2:#7ad7ff; --ring:#2a2f3a; }
     *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--text); background:var(--bg); letter-spacing:.01em;
@@ -91,7 +92,6 @@
     /* Trust strip */
     .trust{max-width:1200px;margin:22px auto 0;padding:0 20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
     .badge{font-size:12px;color:var(--muted);border:1px solid var(--ring);padding:6px 10px;border-radius:999px;background:rgba(19,22,28,.55)}
-    /* NEW: Product Hunt link stiline küçük dokunuş */
     .badge a{color:var(--muted); text-decoration:none}
     .badge a:hover{color:var(--text)}
 
@@ -100,28 +100,12 @@
     h2{font-size:28px;margin-bottom:12px}
     .section-sub{color:var(--muted);margin-bottom:32px}
 
-    /* Screenshots */
-    .shots{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(420px,1fr));
-      gap:24px;align-items:start;justify-items:center
-    }
-    @media (min-width:1400px){ .shots{grid-template-columns:repeat(3,minmax(420px,1fr))} }
-    .shots a{display:block;width:100%}
-    .shots img{width:100%;border-radius:16px;border:1px solid var(--ring);box-shadow:0 6px 28px rgba(0,0,0,.35)}
-
     /* Security/Hash */
     .panel{background:rgba(19,22,28,.55);border:1px solid var(--ring);border-radius:14px;padding:16px;max-width:860px;margin:0 auto}
     .kv{display:grid;grid-template-columns:160px 1fr;gap:10px;text-align:left}
     .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b0f16;border:1px solid var(--ring);padding:10px;border-radius:8px;word-break:break-all}
     .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     .copy{cursor:pointer;border:1px solid var(--ring);padding:8px 10px;border-radius:8px;background:#121721;color:#d1d7e5}
-
-    /* FAQ */
-    .faq{max-width:860px;margin:0 auto;text-align:left}
-    .faq details{background:rgba(19,22,28,.55);border:1px solid var(--ring);border-radius:12px;padding:12px 14px;margin:10px 0}
-    .faq summary{cursor:pointer;font-weight:600;color:var(--text)}
-    .faq p{color:var(--muted);margin:8px 0 0}
 
     footer{text-align:center;color:var(--muted);font-size:14px;padding:60px 0;border-top:1px solid var(--ring);margin-top:80px}
     footer a{color:var(--muted);text-decoration:none}
@@ -140,7 +124,7 @@
       </a>
       <nav>
         <a href="#features">Features</a>
-        <a href="#screenshots">Screens</a>
+        <a href="#demo">Demo</a>
         <a href="#security">Security</a>
         <a href="#download">Download</a>
       </nav>
@@ -154,7 +138,7 @@
       <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="https://buy.uninstallr.app" rel="noopener">Buy Pro — $19</a>
-        <a class="btn btn-ghost" href="#lite">Get Lite (App Store)</a>
+        <a class="btn btn-ghost" href="#demo">▶ Watch demo</a>
       </div>
       <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" decoding="async" />
     </section>
@@ -165,35 +149,22 @@
       <span class="badge">Codesigned (Developer ID)</span>
       <span class="badge">Universal Binary (Apple Silicon & Intel)</span>
       <span class="badge">No kernel extensions</span>
-
-      <!-- NEW: Product Hunt metin rozeti -->
-      <span class="badge">
-        🚀 <a href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank" rel="noopener">Launched on Product Hunt</a>
-      </span>
+      <span class="badge">🚀 <a href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank" rel="noopener">Launched on Product Hunt</a></span>
     </div>
 
-    <!-- OPTIONAL: Resmî Product Hunt görsel rozeti (post_id girersen aç) -->
-    <!--
-    <section aria-label="Product Hunt badge" style="margin-top:34px">
-      <a href="https://www.producthunt.com/posts/uninstallr-for-macos?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-uninstallr-for-macos" target="_blank" rel="noopener" style="display:inline-block">
-        <img
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=YOUR_POST_ID&theme=dark"
-          alt="Uninstallr for macOS - Featured on Product Hunt"
-          style="width: 250px; height: 54px; border-radius:8px; border:1px solid var(--ring);"
-          loading="lazy" decoding="async"
-        />
-      </a>
-    </section>
-    -->
-
-    <!-- Screenshots -->
-    <section id="screenshots">
+    <!-- Demo video -->
+    <section id="demo">
       <h2>See it in action</h2>
-      <p class="section-sub">Uninstallr shows everything before removal — full transparency, full control.</p>
-      <div class="shots">
-        <a href="/public/screens/app-1.png"><img src="/public/screens/app-1.png" alt="Scan results" loading="lazy" decoding="async" /></a>
-        <a href="/public/screens/app-2.png"><img src="/public/screens/app-2.png" alt="Preview leftovers" loading="lazy" decoding="async" /></a>
-        <a href="/public/screens/app-3.png"><img src="/public/screens/app-3.png" alt="Removal complete" loading="lazy" decoding="async" /></a>
+      <p class="section-sub">Watch how Uninstallr completely removes apps and every leftover — one click.</p>
+
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px; max-width:900px; margin:0 auto; box-shadow:0 0 25px rgba(0,0,0,0.3);">
+        <iframe 
+          src="https://www.youtube.com/embed/NaK_W8uViQI?rel=0&modestbranding=1"
+          title="Uninstallr for macOS – Clean your Mac like it never existed"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:16px;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       </div>
     </section>
 
@@ -239,7 +210,7 @@
       </div>
     </section>
 
-    <!-- (placeholders so nav links work; content is above) -->
+    <!-- (placeholder so nav links work; content is above) -->
     <section id="features" aria-hidden="true" style="padding:0;margin:0"></section>
 
     <!-- Download / CTA -->
@@ -262,7 +233,7 @@
     © <span id="year"></span> Uninstallr. All rights reserved.
   </footer>
 
-  <!-- Lightbox -->
+  <!-- Lightbox (unused for now but kept for future gallery) -->
   <div id="lightbox" class="close-hint" aria-hidden="true" style="display:none;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;padding:24px">
     <img alt="Preview" style="max-width:min(1600px,96vw);max-height:92vh;border-radius:12px;border:1px solid #2a2f3a;box-shadow:0 12px 48px rgba(0,0,0,.6)">
   </div>
@@ -280,27 +251,9 @@
         const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1400);
       } catch(e) { alert('Could not copy.'); }
     });
-
-    // Lightbox
-    (function(){
-      const lb = document.getElementById('lightbox');
-      const lbImg = lb.querySelector('img');
-      document.querySelectorAll('.shots a').forEach(a=>{
-        a.addEventListener('click', e=>{
-          e.preventDefault();
-          lbImg.src = a.getAttribute('href');
-          lb.style.display = 'flex';
-          lb.setAttribute('aria-hidden','false');
-        });
-      });
-      function closeLB(){ lb.style.display='none'; lb.setAttribute('aria-hidden','true'); lbImg.removeAttribute('src'); }
-      lb.addEventListener('click', closeLB);
-      document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
-    })();
   </script>
 
   <!-- Plausible (privacy-friendly analytics) -->
   <script defer data-domain="uninstallr.app" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>
-
