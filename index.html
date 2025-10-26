@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Base -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Uninstallr for macOS — Smart. Clean. Complete.</title>
@@ -10,44 +9,17 @@
   <link rel="canonical" href="https://uninstallr.app/" />
   <meta name="apple-mobile-web-app-title" content="Uninstallr" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Uninstallr for macOS" />
-  <meta property="og:site_name" content="Uninstallr" />
   <meta property="og:description" content="Clean your Mac like it never existed. One-click uninstall with full leftover removal. Notarized by Apple." />
   <meta property="og:image" content="https://uninstallr.app/public/screens/og-image.png" />
   <meta property="og:url" content="https://uninstallr.app" />
-  <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Uninstallr for macOS" />
   <meta name="twitter:description" content="Smart, clean, complete uninstalls. Notarized by Apple." />
   <meta name="twitter:image" content="https://uninstallr.app/public/screens/og-image.png" />
 
-  <!-- Icons -->
   <link rel="icon" href="/public/screens/favicon-32.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="/public/screens/app-icon-1024.png" />
-
-  <!-- Perf -->
-  <link rel="preload" as="image" href="/public/screens/hero.png" imagesrcset="/public/screens/hero.png 1x" />
-  <link rel="dns-prefetch" href="https://plausible.io">
-  <link rel="preconnect" href="https://plausible.io" crossorigin>
-  <link rel="dns-prefetch" href="https://buy.uninstallr.app">
-  <link rel="preconnect" href="https://buy.uninstallr.app" crossorigin>
-
-  <!-- FAQ Schema (SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"What’s the difference between Lite and Pro?",
-       "acceptedAnswer":{"@type":"Answer","text":"Lite analyzes and exports reports; Pro fully removes apps and leftovers, with process control and force uninstall."}},
-      {"@type":"Question","name":"Is it safe?",
-       "acceptedAnswer":{"@type":"Answer","text":"Yes. Uninstallr Pro is notarized by Apple and signed with a Developer ID certificate."}},
-      {"@type":"Question","name":"Supported macOS versions?",
-       "acceptedAnswer":{"@type":"Answer","text":"macOS 13 Ventura and newer (Sonoma & Sequoia ready). Universal binary for Apple Silicon and Intel."}}
-    ]
-  }
-  </script>
 
   <style>
     :root { --bg:#0f1115; --text:#e9eef5; --muted:#a6b0c3; --accent:#22C55E; --accent2:#7ad7ff; --ring:#2a2f3a; }
@@ -57,25 +29,20 @@
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--text); background:var(--bg); letter-spacing:.01em;
     }
-
-    /* Header */
     header{position:sticky;top:0;backdrop-filter:saturate(120%) blur(8px);
       background:rgba(15,17,21,.55); border-bottom:1px solid rgba(42,47,58,.6); z-index:10}
     .nav{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
     .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
-    .brand img{width:38px;height:38px;border-radius:8px;object-fit:contain;display:block}
-    .brand span{font-weight:600;font-size:18px;letter-spacing:.02em}
+    .brand img{width:38px;height:38px;border-radius:8px;object-fit:contain}
+    .brand span{font-weight:600;font-size:18px}
     nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:15px}
     nav a:hover{color:var(--text)}
 
-    /* Buttons */
     .btn{display:inline-block;padding:14px 22px;border-radius:12px;font-weight:600;text-decoration:none}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399); color:#001b10}
-    .btn-primary:hover{filter:brightness(1.02)}
     .btn-ghost{border:1px solid var(--ring); color:var(--text)}
     .btn-ghost:hover{border-color:#3b4354}
 
-    /* Hero */
     .hero{max-width:1200px;margin:0 auto;padding:56px 20px 24px;text-align:center}
     .hero h1{
       font-size:clamp(28px,4vw,48px);font-weight:700;
@@ -83,24 +50,27 @@
       -webkit-background-clip:text;color:transparent
     }
     .hero p{max-width:780px;margin:18px auto 24px;color:var(--muted);font-size:18px;line-height:1.6}
-    .hero-ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-    .hero-img{
-      display:block;margin:28px auto 0;width:min(900px,95vw);
-      height:auto;border-radius:16px;border:1px solid var(--ring);box-shadow:0 10px 38px rgba(0,0,0,.35)
+    .hero-ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+    .video-container{
+      position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+      border-radius:16px; max-width:900px; margin:40px auto 0;
+      box-shadow:0 0 25px rgba(0,0,0,0.3);
+    }
+    .video-container iframe{
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      border:0; border-radius:16px;
     }
 
-    /* Trust strip */
     .trust{max-width:1200px;margin:22px auto 0;padding:0 20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
     .badge{font-size:12px;color:var(--muted);border:1px solid var(--ring);padding:6px 10px;border-radius:999px;background:rgba(19,22,28,.55)}
     .badge a{color:var(--muted); text-decoration:none}
     .badge a:hover{color:var(--text)}
 
-    /* Sections */
     section{max-width:1280px;margin:90px auto;padding:0 24px;text-align:center}
     h2{font-size:28px;margin-bottom:12px}
     .section-sub{color:var(--muted);margin-bottom:32px}
 
-    /* Security/Hash */
     .panel{background:rgba(19,22,28,.55);border:1px solid var(--ring);border-radius:14px;padding:16px;max-width:860px;margin:0 auto}
     .kv{display:grid;grid-template-columns:160px 1fr;gap:10px;text-align:left}
     .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b0f16;border:1px solid var(--ring);padding:10px;border-radius:8px;word-break:break-all}
@@ -113,70 +83,54 @@
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
     <div class="nav">
       <a class="brand" href="/">
-        <img src="/public/screens/logo.svg" alt="Uninstallr logo"
-             onerror="this.onerror=null;this.src='/public/screens/app-icon-1024.png';" />
+        <img src="/public/screens/logo.svg" alt="Uninstallr logo" />
         <span>Uninstallr</span>
       </a>
       <nav>
         <a href="#features">Features</a>
-        <a href="#demo">Demo</a>
         <a href="#security">Security</a>
         <a href="#download">Download</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
   <main>
-    <section class="hero" id="top">
+    <section class="hero">
       <h1>Smart. Clean. Complete uninstalls.</h1>
-      <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma &amp; Sequoia.</p>
+      <p>Uninstallr removes apps and every last leftover — caches, LaunchAgents, login items, and more. Notarized by Apple and ready for Sonoma & Sequoia.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://buy.uninstallr.app" rel="noopener">Buy Pro — $19</a>
-        <a class="btn btn-ghost" href="#demo">▶ Watch demo</a>
+        <a class="btn btn-primary" href="https://buy.uninstallr.app">Buy Pro — $19</a>
+        <a class="btn btn-ghost" href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank">🚀 Product Hunt</a>
       </div>
-      <img class="hero-img" src="/public/screens/hero.png" alt="Uninstallr hero" decoding="async" />
-    </section>
 
-    <!-- Social proof / trust -->
-    <div class="trust" aria-label="Trust information">
-      <span class="badge">Notarized by Apple</span>
-      <span class="badge">Codesigned (Developer ID)</span>
-      <span class="badge">Universal Binary (Apple Silicon & Intel)</span>
-      <span class="badge">No kernel extensions</span>
-      <span class="badge">🚀 <a href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank" rel="noopener">Launched on Product Hunt</a></span>
-    </div>
-
-    <!-- Demo video -->
-    <section id="demo">
-      <h2>See it in action</h2>
-      <p class="section-sub">Watch how Uninstallr completely removes apps and every leftover — one click.</p>
-
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px; max-width:900px; margin:0 auto; box-shadow:0 0 25px rgba(0,0,0,0.3);">
+      <!-- video replaces hero.png -->
+      <div class="video-container">
         <iframe 
           src="https://www.youtube.com/embed/NaK_W8uViQI?rel=0&modestbranding=1"
           title="Uninstallr for macOS – Clean your Mac like it never existed"
-          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:16px;"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
     </section>
 
-    <!-- Security / Hash -->
+    <div class="trust">
+      <span class="badge">Notarized by Apple</span>
+      <span class="badge">Codesigned (Developer ID)</span>
+      <span class="badge">Universal Binary (Apple Silicon & Intel)</span>
+      <span class="badge">🚀 <a href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank">Launched on Product Hunt</a></span>
+    </div>
+
     <section id="security">
       <h2>Security & Integrity</h2>
       <p class="section-sub">Verify your download and see the signing details.</p>
       <div class="panel">
         <div class="kv">
-          <div>Version</div><div>1.0.0 (DMG: <strong>Uninstallr-1.0.0.dmg</strong>)</div>
-          <div>Supported macOS</div><div>13+ (Ventura, Sonoma, Sequoia)</div>
-          <div>Codesign</div><div>Developer ID Application: Oguz Camur (3B2P2A675J)</div>
+          <div>Version</div><div>1.0.0</div>
+          <div>Codesign</div><div>Developer ID: Oguz Camur (3B2P2A675J)</div>
           <div>Notarization</div><div>Apple Notarized (stapled)</div>
           <div>SHA-256</div>
           <div class="row">
@@ -187,39 +141,12 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq">
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details>
-          <summary>Uninstallr Lite vs Pro?</summary>
-          <p><strong>Lite</strong>: analyze & report only. <strong>Pro</strong>: full removal of apps and leftovers, with process control and force uninstall.</p>
-        </details>
-        <details>
-          <summary>Is it safe?</summary>
-          <p>Yes. Uninstallr is notarized by Apple and signed with a Developer ID certificate. You always preview files before removal.</p>
-        </details>
-        <details>
-          <summary>Refund policy?</summary>
-          <p>30-day no-questions-asked refund via Gumroad.</p>
-        </details>
-        <details>
-          <summary>Support?</summary>
-          <p>Email us at <a href="mailto:support@uninstallr.app">support@uninstallr.app</a>.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- (placeholder so nav links work; content is above) -->
-    <section id="features" aria-hidden="true" style="padding:0;margin:0"></section>
-
-    <!-- Download / CTA -->
     <section id="download">
       <h2>Download</h2>
       <p class="section-sub">Get the latest notarized build. Drag the app to Applications.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://buy.uninstallr.app" rel="noopener">Buy Pro — $19</a>
-        <a class="btn btn-ghost" id="lite" href="#">Get Lite on the Mac App Store (soon)</a>
+        <a class="btn btn-primary" href="https://buy.uninstallr.app">Buy Pro — $19</a>
+        <a class="btn btn-ghost" href="#">Get Lite (soon)</a>
       </div>
     </section>
   </main>
@@ -233,27 +160,14 @@
     © <span id="year"></span> Uninstallr. All rights reserved.
   </footer>
 
-  <!-- Lightbox (unused for now but kept for future gallery) -->
-  <div id="lightbox" class="close-hint" aria-hidden="true" style="display:none;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;padding:24px">
-    <img alt="Preview" style="max-width:min(1600px,96vw);max-height:92vh;border-radius:12px;border:1px solid #2a2f3a;box-shadow:0 12px 48px rgba(0,0,0,.6)">
-  </div>
-
-  <!-- Scripts -->
   <script>
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Copy SHA
     document.getElementById('copy').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(document.getElementById('sha').textContent.trim());
-        const btn = document.getElementById('copy');
-        const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1400);
-      } catch(e) { alert('Could not copy.'); }
+      await navigator.clipboard.writeText(document.getElementById('sha').textContent.trim());
+      const btn = document.getElementById('copy');
+      const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1400);
     });
   </script>
-
-  <!-- Plausible (privacy-friendly analytics) -->
   <script defer data-domain="uninstallr.app" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>
