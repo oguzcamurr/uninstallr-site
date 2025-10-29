@@ -21,6 +21,7 @@
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/pro", "destination": "https://buy.uninstallr.app", "permanent": true },
     { "source": "/pro/", "destination": "https://buy.uninstallr.app", "permanent": true },
-    { "source": "/buy", "destination": "https://buy.uninstallr.app", "permanent": true }
+    { "source": "/buy", "destination": "https://buy.uninstallr.app", "permanent": true },
+    { "source": "/lite", "destination": "https://apps.apple.com/app/id6754256662", "permanent": true }
   ]
 }
