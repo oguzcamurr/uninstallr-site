@@ -18,6 +18,9 @@
     }
   ],
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/pro", "destination": "https://oguzcamur.gumroad.com/l/wmtqmp", "permanent": true },
+    { "source": "/pro/", "destination": "https://oguzcamur.gumroad.com/l/wmtqmp", "permanent": true },
+    { "source": "/buy", "destination": "https://oguzcamur.gumroad.com/l/wmtqmp", "permanent": true }
   ]
 }
