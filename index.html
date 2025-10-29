@@ -110,7 +110,6 @@
         <a class="btn btn-ghost" href="https://www.producthunt.com/posts/uninstallr-for-macos" target="_blank" rel="noopener">🚀 Product Hunt</a>
       </div>
 
-      <!-- video replaces hero.png -->
       <div class="video-container">
         <iframe 
           src="https://www.youtube.com/embed/NaK_W8uViQI?rel=0&modestbranding=1"
@@ -169,6 +168,7 @@
   </footer>
 
   <script>
+    // Footer year + SHA copy
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('copy').addEventListener('click', async () => {
       await navigator.clipboard.writeText(document.getElementById('sha').textContent.trim());
@@ -176,6 +176,22 @@
       const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1400);
     });
   </script>
-  <script defer data-domain="uninstallr.app" src="https://plausible.io/js/script.js"></script>
+
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-9-z-GM3_cYevd_YWi7G_x.js"></script>
+  <script>
+    // Init + custom events
+    window.plausible = window.plausible || function(){ (plausible.q = plausible.q || []).push(arguments) };
+    plausible.init = plausible.init || function(i){ plausible.o = i || {} };
+    plausible.init();
+
+    // Conversion events
+    document.querySelectorAll('a.btn-primary').forEach(btn => {
+      btn.addEventListener('click', () => plausible('BuyProClick'));
+    });
+    document.querySelectorAll('a.btn-ghost').forEach(btn => {
+      btn.addEventListener('click', () => plausible('LiteStoreClick'));
+    });
+  </script>
 </body>
 </html>
